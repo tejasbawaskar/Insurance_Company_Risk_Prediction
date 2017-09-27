@@ -21,7 +21,7 @@ library(gridExtra)
 # nrow(test_train_data)
 # #Introducing response column to test data
 
-## Arnav file read ##
+## file read
 test <- read.csv("projecttest.csv", header = T)
 dataset <- read.csv("projecttrain.csv", header = T)
 test_dataset <- test
@@ -30,28 +30,7 @@ test_dataset[,"Response"] <- rep(NA,19765)
 #Merging test and train data to impute missing values
 test_train_data <- rbind(dataset,test_dataset)
 
-#59381
-#note to self: loop in R,goes through each row if iterated through columns.
-#percentage_na <- function(data,max_col) {
-#  for(i in 1:max_col)
-#  {
-#    if(sum(is.na(data[,i])) > 0)
-#    {
-#      ratio <- sum(is.na(data[,i]))/nrow(data) * 100
-#      print(paste("Column",names(data[i]),":",ratio))
-#    }
-#  }
-#}
 
-#removed 1 since customer id
-#percentage_na(dataset,127)
-# percentage_na(test_train_data,127)
-# 
-# a <- dataset[,-c(1,30,35,36,37,38,48,53,62,70,128)]
-# b <- dataset[,-c(1,30,35,36,37,38,48,53,62,70)]
-# percentage_na(a,117)
-# percentage_na(b,118)
-# 
 #Imputing with mean and median
 mean_impute <- function(dat) {
   w <- is.na(dat$Employment_Info_1)
@@ -198,8 +177,6 @@ test_train_data$PC4 <- test_train_pca$PC4
 
 ncol(test_train_data)
 names(test_train_data)
-
-
 
 
 main_test <- predict(pca1,new_test_train_data_test[-1])
